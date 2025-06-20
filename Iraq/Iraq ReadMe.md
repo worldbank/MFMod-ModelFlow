@@ -2,17 +2,17 @@
 
 This folder contains the ModelFlow version of a World Bank model for Iraq developed in 2020.
 
-The model includes a compete representation of the national incomes accounts (nominal and real; expenditure, production and income perspectives), the current and financial accounts of the balance of payments, fiscal accounts for the general government and green house gas emissions, economic damages from increased temperatures, changes in rainfall variability, flooding and sea-level rise.
+The model includes a complete representation of the national incomes accounts (nominal and real; expenditure, production and income perspectives), the current and financial accounts of the balance of payments, fiscal accounts for the general government and green house gas emissions, economic damages from increased temperatures, changes in rainfall variability, flooding and sea-level rise.
 
 In addition to the model file itself, the folder contains a `Jupyter Notebook` illustrating the model's use and some of its features.
 
 ## Standard Shocks
 
-The [standard shocks](standardshock.ipynb) notebook illustrates both model properties and how to work with the model under a variety of circumstances, including examples of charts, simulations and tables.
+The [standard shocks](StandardShocks.ipynb) notebook illustrates both model properties and how to work with the model under a variety of circumstances, including examples of charts, simulations and tables.
 
-These include:
-* a temporary one-year 1 percent increase in the monetary policy interest rate;
-* a permanent one percent increase in total factor productivity;
+It demonstrates how to implement and the results of a series of standard macroeconomic shocks, illustrating the impact on the economy of:
+
+
 * the impact of a range of economic stimulus measures:
     * a 1 percent of GDP decrease in indirect taxes
     * a 1 percent of GDP decrease in direct taxes
@@ -21,6 +21,8 @@ These include:
     * a 1 percent of GDP increase in goverment spending on transfers to households
 * a permanent $20 increase in the price of crude oil
 * a permanent 10 percent depreciation of the currency
+* a temporary one-year 1 percent increase in the monetary policy interest rate;
+* a permanent one percent increase in total factor productivity;
 
 A comprehensive introduction to the World Bank Models using Modelflow can be found [here](http:\\WorldBank_ModelFlow.github.com)
 
@@ -38,37 +40,3 @@ A comprehensive introduction to the World Bank Models using Modelflow can be fou
 * [Understanding how climate and economic shocks interact](https://www.preventionweb.net/media/95107/download?startDownload=20250110)
 * [Endogenous technological change in MFMod](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099735005082423970/IDU117d8923a1226614d42196d115fb48f7c219b)
 
-
-```python
-from modelclass import model 
-model.display_toc(folder= ".")
-```
-
-
-**Jupyter notebooks**
-
-
-
-<b>Iraq (.)</b>
-
-
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="Iraq ReadMe.ipynb" target="_blank">Iraq ReadMe</a>
-
-
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="Iraq ReadMe.ipynb" target="_blank">Iraq ReadMe</a>
-
-
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="irqoil price shock.ipynb" target="_blank">irqoil price shock</a>
-
-
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="StandardShocks.ipynb" target="_blank">StandardShocks</a>
-
-
-
-```python
-
-```
