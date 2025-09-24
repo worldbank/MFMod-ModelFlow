@@ -1,0 +1,764 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Some Python basics &#8212; The World Bank&#39;s MFMod Framework in Python with Modelflow</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04_PythonEssentials/PythonBasics';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Introduction to Pandas, Series and dataframes" href="PandasDataFrames.html" />
+    <link rel="prev" title="1. Introduction to Jupyter Notebook" href="Intro_Jupyter_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">The World Bank's MFMod Framework in Python with Modelflow</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Foreword
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The World Bank's MFMod Framework and Modelflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Introduction/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_MacrostructuralModels/MacroStructuralModels.html">2. Macrostructural models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_Installation/InstallingModelFlow.html">3. Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03_Installation/InstallingPython.html">3.1. Installation of Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_Installation/InstallingModelFlowpackage.html">3.2. Installation of  <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_Installation/UpdateModelFlow.html">3.3. Updating ModelFlow</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Some python essentials for using World Bank models with modelflow</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Intro_Jupyter_notebook.html">1. Introduction to  Jupyter Notebook</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Some Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PandasDataFrames.html">3. Introduction to Pandas,  Series and dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected modelflow extensions to pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Modelflow%20and%20Dataframes.html">1. ModelFlow and Pandas DataFrames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="UpdateCommand.html">1.4. The <code class="docutils literal notranslate"><span class="pre">.upd()</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with updated variables.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mfcalc.html">1.5. The <code class="docutils literal notranslate"><span class="pre">.mfcalc()</span></code> method. Return a dataframe with transformed variables.</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using modelflow with World Bank models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/AccessingWBModels.html">1. Using <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> with World Bank models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/WorkingwWBModels.html">2. Working with a World Bank Model under ModelFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/BehavioralEquations.html">3. Equations in MFMod and <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/ScenarioAnalysis.html">4. Scenario analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/MoreComplexScenarios.html">5. More complex scenarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/Targeting.html">6. A simulation that targets a specific outcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/ReportWriting.html">7. Report writing and scenario results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analytics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_ModelAnalytics/ModelStructure.html">1. Model structure and causal chains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_ModelAnalytics/AttributionSomeFeatures.html">2. Analyzing the impact of a shock</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical how tos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_MoreFeatures/GettingHelp.html">1. Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_MoreFeatures/ModelFlowReference.html">2. Modelflow methods reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Backmatter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/WorldBank/WorldBank.github.io/blob/main/MFMod-ModelFlow/jn/mfbook/content/04_PythonEssentials/PythonBasics.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/WorldBank/WorldBank.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/04_PythonEssentials/PythonBasics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Some Python basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-python-in-windows">2.1. Starting python in windows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda-navigator">2.1.1. Anaconda navigator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-packages-libraries-and-classes">2.2. Python  packages, libraries and classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-packages-libraries-modules-and-classes">2.3. Importing packages, libraries, modules and classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-a-package">2.3.1. Import a package</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-specific-elements-or-classes-from-a-module-or-library">2.3.2. Import specific elements or classes from a module or library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-a-library-but-give-it-an-alias">2.3.3. import a library but give it an alias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-aliases">2.3.4. Standard aliases</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="some-python-basics">
+<span id="index-0"></span><h1><span class="section-number">2. </span>Some Python basics<a class="headerlink" href="#some-python-basics" title="Link to this heading">#</a></h1>
+<p>Before using <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> with the World Bank’s <code class="docutils literal notranslate"><span class="pre">MFMod</span></code> models, users  will have to understand at least some basic elements of <code class="docutils literal notranslate"><span class="pre">python</span></code> syntax and usage.  Notably they will need to understand about packages, libraries and classes, and how to access them.</p>
+<div class="tip admonition">
+<p class="admonition-title">In this chapter - Python Basics</p>
+<p>This chapter provides an introduction to essential Python concepts for using World Bank models in ModelFlow. It provides a foundational understanding of Python, equipping users with the skills to engage in macroeconomic modeling tasks.</p>
+<p><strong>Readers familiar with python can safely skip this chapter.</strong></p>
+<p>Key points include:</p>
+<ul class="simple">
+<li><p><strong>Getting Started with Python</strong>:</p>
+<ul>
+<li><p>Launch Python through the terminal, an IDE, or Jupyter Notebook.</p></li>
+<li><p>Use the Anaconda environment for managing dependencies and versions.</p></li>
+</ul>
+</li>
+<li><p><strong>Core Concepts</strong>:</p>
+<ul>
+<li><p>Variables and data types: Store and manipulate data using integers, floats, strings, and lists.</p></li>
+<li><p>Control structures: Use loops and conditionals for automating repetitive tasks and decision-making.</p></li>
+</ul>
+</li>
+<li><p><strong>Libraries and Packages</strong>:</p>
+<ul>
+<li><p>Leverage Python libraries like <code class="docutils literal notranslate"><span class="pre">pandas</span></code> for data handling and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> for visualization.</p></li>
+<li><p>Import libraries, modules, and classes to extend Python’s functionality.</p></li>
+</ul>
+</li>
+<li><p><strong>Interactivity in Jupyter Notebook</strong>:</p>
+<ul>
+<li><p>Write, execute, and document Python code interactively.</p></li>
+<li><p>Use context-sensitive help and auto-completion for efficient coding.</p></li>
+</ul>
+</li>
+<li><p><strong>Best Practices</strong>:</p>
+<ul>
+<li><p>Organize your code for readability and reusability.</p></li>
+<li><p>Validate results step-by-step to ensure correctness.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="starting-python-in-windows">
+<h2><span class="section-number">2.1. </span>Starting python in windows<a class="headerlink" href="#starting-python-in-windows" title="Link to this heading">#</a></h2>
+<p>To begin using <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code>, python itself needs to be started.  This can be done either using the <code class="docutils literal notranslate"><span class="pre">Anaconda</span></code> navigator or from the command line shell. In either case, the user will need to start python and select the <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> environment.</p>
+<section id="anaconda-navigator">
+<span id="index-2"></span><span id="index-1"></span><h3><span class="section-number">2.1.1. </span>Anaconda navigator<a class="headerlink" href="#anaconda-navigator" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Start Anaconda Navigator by typing Anaconda in the Start window and opening the Navigator (see Figure).</p></li>
+<li><p>From Anaconda Navigator select the <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> environment (see figure)</p></li>
+</ol>
+<figure class="align-default" id="start-anaconda-navigator">
+<a class="reference internal image-reference" href="../../_images/AnacondaNav1.png"><img alt="../../_images/AnacondaNav1.png" src="../../_images/AnacondaNav1.png" style="height: 450px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">A newly created Jupyter Notebook session</span><a class="headerlink" href="#start-anaconda-navigator" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="3">
+<li><p>Once the environment is selected the user can either select a command line environment, an IDE or <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> by clicking on the appropriate icon. Options typically include:</p>
+<ol class="arabic simple">
+<li><p>Jupyter Notebook environment</p></li>
+<li><p>The command line environment</p></li>
+<li><p>A programming IDE environment</p></li>
+</ol>
+</li>
+</ol>
+<p>In the figure below the user is selecting the <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> environment.</p>
+<figure class="align-default" id="start-from-anaconda-navigator">
+<a class="reference internal image-reference" href="../../_images/NavigatorChoices.png"><img alt="../../_images/NavigatorChoices.png" src="../../_images/NavigatorChoices.png" style="height: 225px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">A newly created Jupyter Notebook session</span><a class="headerlink" href="#start-from-anaconda-navigator" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you start Jupyter Notebook with Anaconda Navigator you will need to select which environment you want jupyter to be running in (see the drop-down at the top center of the above screen shot), To have access to  <code class="docutils literal notranslate"><span class="pre">ModeFlow</span></code>, you will need to select an environment into which <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> has been installed (there could be more than one).</p>
+</div>
+</section>
+</section>
+<section id="python-packages-libraries-and-classes">
+<span id="index-5"></span><span id="index-4"></span><span id="index-3"></span><h2><span class="section-number">2.2. </span>Python  packages, libraries and classes<a class="headerlink" href="#python-packages-libraries-and-classes" title="Link to this heading">#</a></h2>
+<p>Some features of <code class="docutils literal notranslate"><span class="pre">python</span></code> are built-in.  Others (like <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code>) are optional.  Optional packages build on basic python features (and those of other packages) but have to be installed separately.</p>
+<p>A <strong>python class</strong> is a code template that defines a python object. Classes can have properties [variables or data] associated with them and methods (behaviors or functions) associated with them. In python, a class is created by the keyword class. An object of type class is created (instantiated) using the class’s “constructor” – a special method that creates an object that is an instance of a class.</p>
+<p>A <strong>module</strong> is a Python object consisting of Python code. A module can define functions, classes and variables. A module can also include runnable code.</p>
+<p>A <strong>python package</strong> is a collection of modules that are related to each other. When a module from an external package is required by a program, that package (or module in the package) must  be <strong>imported</strong> into the current session in order for its modules to be accessible.</p>
+<p>A <strong>python library</strong> is a collection of related modules or packages.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> is a python package that <em>inherits</em> (build on or adds to) the methods and properties of other <code class="docutils literal notranslate"><span class="pre">python</span></code> classes like <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+</section>
+<section id="importing-packages-libraries-modules-and-classes">
+<span id="index-7"></span><span id="index-6"></span><h2><span class="section-number">2.3. </span>Importing packages, libraries, modules and classes<a class="headerlink" href="#importing-packages-libraries-modules-and-classes" title="Link to this heading">#</a></h2>
+<p>Some libraries, packages, and modules are part of the core python package and will be available (importable) from the get-go.  Others are not, and need to be installed before importing them into a session.</p>
+<p>If you followed the <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> installation instructions you have already downloaded and installed on your computer all the packages necessary for running World Bank models under <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code>.  But to work with them in a given <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> session or in a program context, you will also need to <code class="docutils literal notranslate"><span class="pre">import</span></code> them into your session before you call them.</p>
+<div class="{note}**Installation** docutils">
+<p>Installation downloads a package’s programs from the internet into a specific environment on the user’s machine, making them available to be imported when required.  Once it has been installed, the environment into which it was installed must be activated and the package must be imported into each python session where it is to be used.</p>
+</div>
+<p>Typically a python program will start with the importation of the libraries, classes and modules that will be used.  Because a <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> is essentially a heavily annotated program, it also requires that packages used be imported.</p>
+<section id="import-a-package">
+<h3><span class="section-number">2.3.1. </span>Import a package<a class="headerlink" href="#import-a-package" title="Link to this heading">#</a></h3>
+<p>As described above: packages, libraries and modules are containers that can include other elements.  Take for example the package Math.</p>
+<p>To import the Math Package we execute the command <code class="docutils literal notranslate"> <span class="pre">import</span> <span class="pre">math</span></code>.  Having done that we can call the functions and data that are defined in it (math is a standard package so we do not need to install it separately).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the &quot;#&quot; in a code cell indicates a comment, test after the # will not be executed</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># Now that we have imported math we can access some of the elements identified in </span>
+<span class="c1"># the package.</span>
+<span class="c1"># For example math contains a definition for pi, we can access that by executing </span>
+<span class="c1"># the pi method of the library math</span>
+
+<span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Running code in Jupyter Notebook causes the results of the code to be displayed. As discussed in Chapter 4, a code cell in Jupyter Notebook can be executed either by keystroke short-cut (Control-Enter or Shift-Enter) or by clicking on the Run button on the Jupyter menu bar.</p>
+</div>
+</section>
+<section id="import-specific-elements-or-classes-from-a-module-or-library">
+<span id="index-9"></span><span id="index-8"></span><h3><span class="section-number">2.3.2. </span>Import specific elements or classes from a module or library<a class="headerlink" href="#import-specific-elements-or-classes-from-a-module-or-library" title="Link to this heading">#</a></h3>
+<p>The python package <code class="docutils literal notranslate"><span class="pre">math</span></code> contains several functions and classes.</p>
+<p>Rather than importing the whole package (as above), these classes can be imported directly using the <strong>from syntax</strong>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">pi,cos,sin</span></code></p>
+<p>When imported in this fashion, the user does not have to precede the class or method with the name of their library. The above <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">pi,cos,sin</span></code> command imports the pi constant and the two functions cos and sin from the math package directly and allow  the user to call them using their names without preceding them with <code class="docutils literal notranslate"><span class="pre">math.</span></code>.</p>
+<p>Compare these calls with the one in the preceding section – there the call to the method pi has to be preceded by its namespace designator math.  i.e. <code class="docutils literal notranslate"><span class="pre">math.pi</span></code>. Below we import pi directly and can just call it with <code class="docutils literal notranslate"><span class="pre">pi</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">cos</span><span class="p">,</span><span class="n">sin</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+-0.9899924966004454
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-a-library-but-give-it-an-alias">
+<h3><span class="section-number">2.3.3. </span>import a library but give it an alias<a class="headerlink" href="#import-a-library-but-give-it-an-alias" title="Link to this heading">#</a></h3>
+<p>An imported library/packages can also be given an alias, that is hopefully shorter than its official name but still obvious enough that the user knows what class is being referred to.</p>
+<p>For example  <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span> <span class="pre">as</span> <span class="pre">m</span></code> allows a call to pi using the more succinct syntax <code class="docutils literal notranslate"><span class="pre">m.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">m</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+-0.9899924966004454
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-aliases">
+<h3><span class="section-number">2.3.4. </span>Standard aliases<a class="headerlink" href="#standard-aliases" title="Link to this heading">#</a></h3>
+<p>Some packages are so frequently used that by convention they have been “assigned” specific aliases.</p>
+<p>For example:</p>
+<p><strong>Common aliases</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Alias</p></th>
+<th class="head text-left"><p>aliased package</p></th>
+<th class="head text-left"><p>example</p></th>
+<th class="head text-left"><p>functionality</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>pd</p></td>
+<td class="text-left"><p>pandas</p></td>
+<td class="text-left"><p>import pandas as pd</p></td>
+<td class="text-left"><p>Pandas are used for storing and retrieving data</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>np</p></td>
+<td class="text-left"><p>numpy</p></td>
+<td class="text-left"><p>import numpy as np</p></td>
+<td class="text-left"><p>Numpy gives access to some advanced mathematical features</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>plt</p></td>
+<td class="text-left"><p>matplotlib</p></td>
+<td class="text-left"><p>import matplotlib as plt</p></td>
+<td class="text-left"><p>matplotlib provides a wide-range of routines for plotting numerical data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You don’t have to use those conventions but it will make your code easier to read by others who are familiar with them.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content\04_PythonEssentials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Intro_Jupyter_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introduction to  Jupyter Notebook</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PandasDataFrames.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Introduction to Pandas,  Series and dataframes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-python-in-windows">2.1. Starting python in windows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda-navigator">2.1.1. Anaconda navigator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-packages-libraries-and-classes">2.2. Python  packages, libraries and classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-packages-libraries-modules-and-classes">2.3. Importing packages, libraries, modules and classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-a-package">2.3.1. Import a package</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-specific-elements-or-classes-from-a-module-or-library">2.3.2. Import specific elements or classes from a module or library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-a-library-but-give-it-an-alias">2.3.3. import a library but give it an alias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-aliases">2.3.4. Standard aliases</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Andrew Burns and Ib Hansen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright World Bank. 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

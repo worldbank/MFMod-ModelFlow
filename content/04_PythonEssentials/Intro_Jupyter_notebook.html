@@ -1,0 +1,967 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Introduction to Jupyter Notebook &#8212; The World Bank&#39;s MFMod Framework in Python with Modelflow</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04_PythonEssentials/Intro_Jupyter_notebook';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. Some Python basics" href="PythonBasics.html" />
+    <link rel="prev" title="3.3. Updating ModelFlow" href="../03_Installation/UpdateModelFlow.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">The World Bank's MFMod Framework in Python with Modelflow</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Foreword
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">The World Bank's MFMod Framework and Modelflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Introduction/Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_MacrostructuralModels/MacroStructuralModels.html">2. Macrostructural models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03_Installation/InstallingModelFlow.html">3. Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03_Installation/InstallingPython.html">3.1. Installation of Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_Installation/InstallingModelFlowpackage.html">3.2. Installation of  <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_Installation/UpdateModelFlow.html">3.3. Updating ModelFlow</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Some python essentials for using World Bank models with modelflow</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Introduction to  Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonBasics.html">2. Some Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PandasDataFrames.html">3. Introduction to Pandas,  Series and dataframes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected modelflow extensions to pandas</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Modelflow%20and%20Dataframes.html">1. ModelFlow and Pandas DataFrames</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="UpdateCommand.html">1.4. The <code class="docutils literal notranslate"><span class="pre">.upd()</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with updated variables.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mfcalc.html">1.5. The <code class="docutils literal notranslate"><span class="pre">.mfcalc()</span></code> method. Return a dataframe with transformed variables.</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using modelflow with World Bank models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/AccessingWBModels.html">1. Using <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> with World Bank models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/WorkingwWBModels.html">2. Working with a World Bank Model under ModelFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/BehavioralEquations.html">3. Equations in MFMod and <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/ScenarioAnalysis.html">4. Scenario analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/MoreComplexScenarios.html">5. More complex scenarios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/Targeting.html">6. A simulation that targets a specific outcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_WBModels/ReportWriting.html">7. Report writing and scenario results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analytics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_ModelAnalytics/ModelStructure.html">1. Model structure and causal chains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_ModelAnalytics/AttributionSomeFeatures.html">2. Analyzing the impact of a shock</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical how tos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_MoreFeatures/GettingHelp.html">1. Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_MoreFeatures/ModelFlowReference.html">2. Modelflow methods reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Backmatter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Reference.html">Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/WorldBank/WorldBank.github.io/blob/main/MFMod-ModelFlow/jn/mfbook/content/04_PythonEssentials/Intro_Jupyter_notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/WorldBank/WorldBank.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/04_PythonEssentials/Intro_Jupyter_notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to  Jupyter Notebook</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-jupyter-notebook">1.1. Starting Jupyter Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-notebook">1.2. Creating a notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-cells">1.3. Jupyter Notebook cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-delete-and-move-cells">1.3.1. How to add, delete and move cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-type-of-a-cell">1.3.2. Change the type of a cell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-of-cells">1.3.3. Execution of cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-python-code">1.3.3.1. Executing python code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-cells-and-the-markdown-scripting-language-in-jupyter-notebook">1.3.4. Markdown cells and the markdown scripting language in Jupyter Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-markdown-commands">1.3.4.1. Common markdown commands</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tables-in-markdown">1.3.4.2. Tables in markdown</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-code">1.3.4.3. Displaying code</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#inine-code-blocks">1.3.4.3.1. Inine code blocks</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#multiline-code-block">1.3.4.3.2. Multiline code block</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rendering-mathematics-in-markdown">1.3.4.4. Rendering mathematics in markdown</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-and-multi-line-math">1.3.4.5. Complex and multi-line math</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#links-to-more-info-on-markdown">1.3.5. links to more info on markdown</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-jupyter-notebook">
+<h1><span class="section-number">1. </span>Introduction to  Jupyter Notebook<a class="headerlink" href="#introduction-to-jupyter-notebook" title="Link to this heading">#</a></h1>
+<p id="index-0"><code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> is an application for creating, annotating, simulating and working with computational documents.  Originally developed for python, the latest versions of EViews also support <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebooks</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> offers a simple, streamlined, document-centric experience and can be a great environment for documenting the work you are doing, and trying alternative methods of achieving desired results.  Many of the methods in <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> have been developed to work well with <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code> Notebook. Indeed this documentation was written as a series of <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebooks</span></code> bound together with the <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">Jupyter Book package</a>.</p>
+<p>Jupyter Notebook is not the only way to work with <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> or Python.  As users become more advanced they are likely to migrate to a more program-centric IDE (Interactive Development Environment) like Spyder or Microsoft Visual Code.</p>
+<p>However, to start, Jupyter Notebooks is a great environment in which to follow work done by others, try out code, and tweak the codes of others to fit your own needs.</p>
+<div class="tip admonition">
+<p class="admonition-title">In this chapter - Introduction to Jupyter Notebook</p>
+<p>This chapter introduces Jupyter Notebook. It can be safely skipped by readers already familiar with Jupyter Notebook (an interactive environment for programming, documenting, and analyzing data).</p>
+<p>Key points in the chapter include:</p>
+<ul class="simple">
+<li><p><strong>What is Jupyter Notebook</strong>:</p>
+<ul>
+<li><p>A tool for creating and sharing computational documents that integrate code, text, and visualizations.</p></li>
+<li><p>Ideal for prototyping, debugging, and documenting workflows.</p></li>
+</ul>
+</li>
+<li><p><strong>Getting Started</strong>:</p>
+<ul>
+<li><p>Activate the Python environment and launch Jupyter Notebook from the command line.</p></li>
+<li><p>Navigate to your desired working directory and start a new notebook.</p></li>
+</ul>
+</li>
+<li><p><strong>Notebook Structure</strong>:</p>
+<ul>
+<li><p>Composed of cells that can contain code, markdown, or outputs.</p></li>
+<li><p>Cells have two modes: Edit (for writing code or text) and Command (for running cells or managing notebook structure).</p></li>
+</ul>
+</li>
+<li><p><strong>Key Features</strong>:</p>
+<ul>
+<li><p>Write and execute Python code interactively.</p></li>
+<li><p>Use Markdown for formatted text, including headers, bullet points, and inline mathematics.</p></li>
+<li><p>Render complex mathematical equations with LaTeX.</p></li>
+</ul>
+</li>
+<li><p><strong>Shortcuts and Tips</strong>:</p>
+<ul>
+<li><p>Use keyboard shortcuts to navigate, edit, and execute cells efficiently.</p></li>
+<li><p>Combine code, results, and documentation in one notebook for replicability.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>There are many fine tutorials on Jupyter Notebook on the web, and <a class="reference external" href="https://docs.jupyter.org/en/latest/">The official Jupyter site</a> is a good starting point. Another good reference is <a class="reference external" href="https://jupyter.brynmawr.edu/services/public/dblank/Jupyter%20Notebook%20Users%20Manual.ipynb">here</a>.</p>
+<p>The remainder of this chapter aims to provide enough information to get a user started.</p>
+<section id="starting-jupyter-notebook">
+<span id="index-1"></span><h2><span class="section-number">1.1. </span>Starting Jupyter Notebook<a class="headerlink" href="#starting-jupyter-notebook" title="Link to this heading">#</a></h2>
+<p>Each time, a user wants to work with <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code>, they will need to activate the <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> environment by</p>
+<ol class="arabic simple">
+<li><p>Opening the Anaconda command prompt window (Windows Start-&gt;Type Annaconda-&gt;Select Annaconda Command Prompt)</p></li>
+<li><p>Activate the <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> environment we just created by executing the following command: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">ModelFlow</span></code></p></li>
+<li><p>Navigate to a position on his/her computer’s directory structure where they want to store (or where they are already stored) their <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebooks</span></code>. (e.g. cd c:\users\MyUserName\MyJupyterNotebookDirectory)</p></li>
+<li><p>Finally, the <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> python program must be started by executing the following command from the conda command line:</p></li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code></p>
+</div></blockquote>
+<p>This will launch the <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code> environment in your default web browser, which should look something like the image below, where the directory structure presented is that of the directory from which the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> command was executed (e.g. c:\users\MyUserName\MyJupyterNotebookDirectory).</p>
+<figure class="align-default" id="jupyter-file-open">
+<a class="reference internal image-reference" href="../../_images/NewJNSession.png"><img alt="../../_images/NewJNSession.png" src="../../_images/NewJNSession.png" style="height: 225px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">The Jupyter File explorer  view</span><a class="headerlink" href="#jupyter-file-open" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note the directory from which you execute the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> will be the <strong>root</strong> directory for the jupyter session.  <strong>Only directories and files below this root directory will be accessible by <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code></strong>.</p>
+</div>
+</section>
+<section id="creating-a-notebook">
+<span id="index-2"></span><h2><span class="section-number">1.2. </span>Creating a notebook<a class="headerlink" href="#creating-a-notebook" title="Link to this heading">#</a></h2>
+<p>The idea behind <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> is to create an interactive version of the physical notebooks that scientists use(d) to:</p>
+<ul class="simple">
+<li><p>record what they have done</p></li>
+<li><p>perhaps explain why</p></li>
+<li><p>document how data were generated, and</p></li>
+<li><p>record the results of their experiments</p></li>
+</ul>
+<p>The motivation for these notebooks and <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> is to record the precise steps taken to produce a set of results, which, if followed, would allow others to generate the same results.</p>
+<p>To create a new blank notebook you must select from the <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> menu</p>
+<p>File-&gt; New Notebook</p>
+<figure class="align-default" id="create-new-notebook">
+<a class="reference internal image-reference" href="../../_images/NewNotebook.png"><img alt="../../_images/NewNotebook.png" src="../../_images/NewNotebook.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">A newly created Jupyter Notebook session</span><a class="headerlink" href="#create-new-notebook" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>This will generate a blank unnamed notebook with one empty cell, that looks something like this:</p>
+<figure class="align-default" id="new-notebook">
+<a class="reference internal image-reference" href="../../_images/Newcell.png"><img alt="../../_images/Newcell.png" src="../../_images/Newcell.png" style="height: 225px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">A newly created Jupyter Notebook</span><a class="headerlink" href="#new-notebook" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each notebook has associated with it a “Kernel”, which is an instance of the computing environment in which code will be executed. For <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebooks</span></code> that work with <code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> this will be a python Kernel. If your computer has more than one “kernel” installed on it, you may be prompted when creating a new notebook for the kernel with which to associate it. Typically this should be the Python Kernel under which your ModelFlow was built – currently python 3.13 in June 2025. :::</p>
+</div>
+</section>
+<section id="jupyter-notebook-cells">
+<span id="index-3"></span><h2><span class="section-number">1.3. </span>Jupyter Notebook cells<a class="headerlink" href="#jupyter-notebook-cells" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> is comprised of a series of cells.</p>
+<p id="index-5"><span id="index-4"></span><em><strong>Jupyter Notebook cells can contain:</strong></em></p>
+<ul class="simple">
+<li><p><strong>computer code</strong>: typically python code, but, as noted, other kernels – like EViews – can also be used with <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code>.</p></li>
+<li><p><strong>markdown text</strong>: plain text that can include special characters that make some text appear as bold, or indicate the text is a header, or instruct <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code> to render the text as a mathematical formula.  All of the text in this document was entered using <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code>’s markdown language (more on this below).</p></li>
+<li><p>Results (in the form of tables or graphs) from the execution of computer code specified in a code cell.</p></li>
+</ul>
+<p id="index-6"><strong>Every cell has two modes:</strong></p>
+<ol class="arabic simple">
+<li><p>Edit mode – indicated by a green vertical bar. In edit mode, the user can change the code, or the markdown.</p></li>
+<li><p>Command mode – indicated by a blue vertical bar.  This will be the state of the cell when its content has been executed.  For markdown cells this means that the text and special characters have been rendered into formatted text.  For code cells, this means the code has been executed and its output (if any) is displayed in an output cell that will be generated in the space immediately below the code cell that generated the output. Also the keyboard is mapped to actions which allows the user to perform tasks like selecting and copying on the cells.</p></li>
+</ol>
+<p><strong>Users can switch between Edit and Command  Mode by hitting Esc (to Command mode) or Enter (to Edit mode). With the mouse a double-click in the cell content will switch to Edit Mode and a click in the cell margin will switch to the Command mode.</strong></p>
+<p>```{note} <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code>s were designed to facilitate <em>replicability</em>: the idea that a scientific analysis should contain - in addition to the final output (text, graphs, tables) - all the computational steps needed to get from raw input data to the results.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<section id="how-to-add-delete-and-move-cells">
+<span id="index-7"></span><h3><span class="section-number">1.3.1. </span>How to add, delete and move cells<a class="headerlink" href="#how-to-add-delete-and-move-cells" title="Link to this heading">#</a></h3>
+<p>The newly created Jupyter Notebook will have a code cell by default.  Cells can be added, deleted and moved either via mouse using the toolbar or by keyboard shortcut.</p>
+<p><strong>Using the Toolbar</strong></p>
+<ul class="simple">
+<li><p><strong>+ button</strong>: add a cell below the current cell</p></li>
+<li><p><strong>scissors</strong>: cut  current cell (can be undone from “Edit” tab)</p></li>
+<li><p><strong>clipboard</strong>: paste a previously cut cell to the current location</p></li>
+<li><p><strong>arrows (up and down)</strong>: move cells (cell must be in Select/Copy mode – vertical side bar must be blue)</p></li>
+<li><p><strong>hold shift + click cells in left margin</strong>: select multiple cells (vertical bar must be blue)</p></li>
+</ul>
+<p><strong>Using keyboard short cuts</strong></p>
+<ul class="simple">
+<li><p><strong>esc + a</strong>: add a cell above the current cell</p></li>
+<li><p><strong>esc + b</strong>: add a cell below the current cell</p></li>
+<li><p><strong>esc + d+d</strong>: delete the currently selected cell(s)</p></li>
+</ul>
+</section>
+<section id="change-the-type-of-a-cell">
+<span id="index-8"></span><h3><span class="section-number">1.3.2. </span>Change the type of a cell<a class="headerlink" href="#change-the-type-of-a-cell" title="Link to this heading">#</a></h3>
+<p>You can also change the type of a cell. New cells are by default “code” cells.</p>
+<p><strong>Using the Toolbar</strong></p>
+<ul class="simple">
+<li><p>Select the desired type from the drop down.  options include</p>
+<ul>
+<li><p>Markdown</p></li>
+<li><p>Code</p></li>
+<li><p>Raw NBConvert</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Using keyboard short cuts</strong></p>
+<ul class="simple">
+<li><p><strong>esc + m</strong>: make the current cell a markdown cell</p></li>
+<li><p><strong>esc + y</strong>: make the current cell a code  cell</p></li>
+</ul>
+<p><strong>Auto-complete and context-sensitive help</strong></p>
+<p>When editing a code cell, you can use these short-cuts to autocomplete and or call up documentation for a command.</p>
+<ul class="simple">
+<li><p><strong>tab</strong>: autocomplete and  method selection</p></li>
+<li><p><strong>double tab</strong>: documention (double tab for full doc)</p></li>
+</ul>
+</section>
+<section id="execution-of-cells">
+<span id="index-9"></span><h3><span class="section-number">1.3.3. </span>Execution of cells<a class="headerlink" href="#execution-of-cells" title="Link to this heading">#</a></h3>
+<p>Every cell in a Jupyter Notebook can be executed. Executing a markdown cell will cause the cell’s content to be rendered as html.  Executing a python code cell, will cause its content to be executed. Cells can be executed either by using the Run button on the Jupyter Notebook menu, or by using one of <strong>two keyboard shortcuts</strong>:</p>
+<ul class="simple">
+<li><p><strong>ctrl + Enter</strong>: Executes the code in the cell or formats the markdown of a cell.  The current cell retains the focus.  The cursor will stay on the cell that was executed.</p></li>
+<li><p><strong>shift + enter</strong>: Executes the code in the cell or formats the markdown of a cell. The focus (cursor) jumps to the next cell.</p></li>
+</ul>
+<p>For other useful shortcuts see “Help” =&gt; “Keyboard Shortcuts” or simply press the keyboard icon in the toolbar.</p>
+<section id="executing-python-code">
+<span id="index-10"></span><h4><span class="section-number">1.3.3.1. </span>Executing python code<a class="headerlink" href="#executing-python-code" title="Link to this heading">#</a></h4>
+<p>Below is a code cell with some standard python that declares a variable “x”, assigns it the value 10, declares a second variable “y” and assigns it the value 45.  The final line of y alone, instructs python to display the value of the variable y.  The results of the operation appear in Jupyter Notebook as an output cell Out[#].  By pressing <strong>Ctrl-Enter</strong> the code will be executed and the output displayed below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45
+</pre></div>
+</div>
+</div>
+</div>
+<p id="index-11"><strong>The semi-colon “;” suppresses output in Jupyter Notebook</strong></p>
+<p>In the example below, a semi-colon “;” has been appended to the final line.  This suppresses the display of the value contained by y;  As a result there is no output cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="n">y</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way to display results is to use the print function.  In this instance even if there is a semicolon at the end of the line, the result of the print command is still output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Variables in a Jupyter Notebook session are persistent, as a result in the subsequent cell, we can declare a variable ‘z’ equal to 2*y and it will have the value 90.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">=</span><span class="n">y</span><span class="o">*</span><span class="mi">2</span>
+<span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90
+</pre></div>
+</div>
+</div>
+</div>
+<div class="{Note}Cells docutils">
+<p>The natural order is to execute them sequentially in the order they appear in the <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code>.  However, when debugging or developing code it may be useful to execute cells out of their natural order.</p>
+<p>The persistence of data (the fact that a variable <code class="docutils literal notranslate"><span class="pre">y</span></code> defined in one cell can be used in another cell) depends on the order in which cells were executed, not the order they appear in the notebook.</p>
+</div>
+</section>
+</section>
+<section id="markdown-cells-and-the-markdown-scripting-language-in-jupyter-notebook">
+<span id="index-12"></span><h3><span class="section-number">1.3.4. </span>Markdown cells and the markdown scripting language in Jupyter Notebook<a class="headerlink" href="#markdown-cells-and-the-markdown-scripting-language-in-jupyter-notebook" title="Link to this heading">#</a></h3>
+<p>Text cells in a notebook can be made more interesting by using markdown.</p>
+<p>Cells designated as markdown cells when executed are rendered in a rich text format (html).</p>
+<p>Markdown is a lightweight markup language for creating formatted text using a plain-text editor.  Used in a markdown cell of <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> it can be used to produce nicely formatted text that mixes text, mathematical formulae, code and outputs from executed python code.</p>
+<p>Rather than the relatively complex commands of html &lt;h1&gt;&lt;/h1&gt;, markdown uses a simplified set of commands to control how text elements should be rendered.</p>
+<section id="common-markdown-commands">
+<span id="index-14"></span><span id="index-13"></span><h4><span class="section-number">1.3.4.1. </span>Common markdown commands<a class="headerlink" href="#common-markdown-commands" title="Link to this heading">#</a></h4>
+<p>Some of the most common of these include:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>symbol</p></th>
+<th class="head text-left"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>#</p></td>
+<td class="text-left"><p>Header</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>##</p></td>
+<td class="text-left"><p>second level</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>###</p></td>
+<td class="text-left"><p>third level etc.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>**Bold text**</p></td>
+<td class="text-left"><p><strong>Bold text</strong></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>*Italics text*</p></td>
+<td class="text-left"><p><em>Italics text</em></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>* text</p></td>
+<td class="text-left"><p>* Bulleted text or dot notes</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>1. text</p></td>
+<td class="text-left"><p>1. Numbered bullets</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tables-in-markdown">
+<span id="index-16"></span><span id="index-15"></span><h4><span class="section-number">1.3.4.2. </span>Tables in markdown<a class="headerlink" href="#tables-in-markdown" title="Link to this heading">#</a></h4>
+<p>Tables like the one above can be constructed using the symbol | as a separator.</p>
+<p>Below is the markdown code that generated the above table:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">symbol</span>           <span class="o">|</span> <span class="n">Effect</span>          <span class="o">|</span>
+<span class="o">|</span><span class="p">:</span><span class="o">--|</span><span class="p">:</span><span class="o">--|</span>                                <span class="c1"># Specifies the justification for the columns of the table.</span>
+<span class="o">|</span> \<span class="c1">#               | Header        |</span>
+<span class="o">|</span> \<span class="c1">#\#             | second level |</span>
+<span class="o">|</span> \<span class="o">*</span>\<span class="o">*</span><span class="n">Bold</span> <span class="n">text</span>\<span class="o">*</span>\<span class="o">*</span> <span class="o">|</span> <span class="o">**</span><span class="n">Bold</span> <span class="n">text</span><span class="o">**</span>   <span class="o">|</span>
+<span class="o">|</span> \<span class="o">*</span><span class="n">Italics</span> <span class="n">text</span>\<span class="o">*</span> <span class="o">|</span> <span class="o">*</span><span class="n">Italics</span> <span class="n">text</span><span class="o">*</span>   <span class="o">|</span>
+<span class="o">|</span> 
+<span class="o">|</span> <span class="mi">1</span>\<span class="o">.</span> <span class="n">text</span>  <span class="o">|</span> <span class="mf">1.</span> <span class="n">Numbered</span> <span class="n">bullets</span>   <span class="o">|</span>
+
+</pre></div>
+</div>
+<p>The |:–|:–| on the second line tells the Table generator how to justify the contents of columns.  The <code class="docutils literal notranslate"><span class="pre">\</span></code> before the #s above tells markdown to ignore the normal meaning of # and just show the symbol.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Symbol</p></th>
+<th class="head text-left"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">:--</span></code></p></td>
+<td class="text-left"><p>left justify</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">:--:</span></code></p></td>
+<td class="text-left"><p>center justify</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">--:</span></code></p></td>
+<td class="text-left"><p>right justify.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">\</span></code></p></td>
+<td class="text-left"><p>Literal operator. Display what follows do not interpret it in the normal way.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="displaying-code">
+<span id="index-18"></span><span id="index-17"></span><h4><span class="section-number">1.3.4.3. </span>Displaying code<a class="headerlink" href="#displaying-code" title="Link to this heading">#</a></h4>
+<p>To display a  block of (unexecutable) code within a markdown cell, encapsulate it (surround it) with backticks `.</p>
+<section id="inine-code-blocks">
+<h5><span class="section-number">1.3.4.3.1. </span>Inine code blocks<a class="headerlink" href="#inine-code-blocks" title="Link to this heading">#</a></h5>
+<p>For inline code references ‘ a single back tick at the beginning and end suffices.  For example, the below line</p>
+<p>An example sentence with some back-ticked `text as code` in the middle <strong>will render as:</strong></p>
+<p>An example sentence with some back-ticked <code class="docutils literal notranslate"><span class="pre">text</span> <span class="pre">as</span> <span class="pre">code</span></code> in the middle.</p>
+</section>
+<section id="multiline-code-block">
+<h5><span class="section-number">1.3.4.3.2. </span>Multiline code block<a class="headerlink" href="#multiline-code-block" title="Link to this heading">#</a></h5>
+<p>For a multiline section of code use three backticks at the beginning and end.</p>
+<p>The below block of code:</p>
+<p><code class="docutils literal notranslate"><span class="pre">```</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Multi</span> <span class="pre">line</span> </code></p>
+<p><code class="docutils literal notranslate"><span class="pre">text</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">rendered</span> <span class="pre">as</span> <span class="pre">code</span> </code></p>
+<p><code class="docutils literal notranslate"><span class="pre">```</span></code></p>
+<p>will render as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Multi</span> <span class="n">line</span> 
+<span class="n">text</span> <span class="n">to</span> <span class="n">be</span> <span class="n">rendered</span> <span class="k">as</span> <span class="n">code</span> 
+</pre></div>
+</div>
+</section>
+</section>
+<section id="rendering-mathematics-in-markdown">
+<span id="index-20"></span><span id="index-19"></span><h4><span class="section-number">1.3.4.4. </span>Rendering mathematics in markdown<a class="headerlink" href="#rendering-mathematics-in-markdown" title="Link to this heading">#</a></h4>
+<p>Jupyter Notebook’s implementation of Markdown supports <code class="docutils literal notranslate"><span class="pre">latex</span></code> mathematical notation.<br></p>
+<p>Maths can be displayed either <em>inline</em> – surrounded by non mathematical text on the same line, or as a standalone equation.</p>
+<p>Below is an example of inline mathematics, which was generated by surrounding the latex maths expression by the  <code class="docutils literal notranslate"><span class="pre">$</span></code> sign:</p>
+<p>The inline code <code class="docutils literal notranslate"><span class="pre">$y_t</span> <span class="pre">=</span> <span class="pre">\beta_0</span> <span class="pre">+</span> <span class="pre">\beta_1</span> <span class="pre">x_t</span> <span class="pre">+</span> <span class="pre">u_t\$</span></code> will renders as: <span class="math notranslate nohighlight">\(y_t = \beta_0 + \beta_1 x_t + u_t\)</span></p>
+<p>if enclosed in <code class="docutils literal notranslate"><span class="pre">$$</span></code> <code class="docutils literal notranslate"><span class="pre">$$</span></code> the encapsulated javascript will render on its own line.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$y_t = \beta_0 + \beta_1 x_t + u_t$$
+</pre></div>
+</div>
+<p>will be rendered centered on its own line – as here.</p>
+<div class="math notranslate nohighlight">
+\[y_t = \beta_0 + \beta_1 x_t + u_t\]</div>
+</section>
+<section id="complex-and-multi-line-math">
+<span id="index-22"></span><span id="index-21"></span><h4><span class="section-number">1.3.4.5. </span>Complex and multi-line math<a class="headerlink" href="#complex-and-multi-line-math" title="Link to this heading">#</a></h4>
+<p>Multiline expressions and equations can also be rendered:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">begin</span><span class="p">{</span><span class="n">align</span><span class="o">*</span><span class="p">}</span>
+<span class="n">Y_t</span>  <span class="o">&amp;=</span>  <span class="n">C_t</span><span class="o">+</span><span class="n">I_t</span><span class="o">+</span><span class="n">G</span><span class="o">+</span><span class="n">t</span><span class="o">+</span> <span class="p">(</span><span class="n">X_t</span><span class="o">-</span><span class="n">M_t</span><span class="p">)</span> \\
+<span class="n">C_t</span> <span class="o">&amp;=</span> <span class="n">c</span><span class="p">(</span><span class="n">C_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span><span class="n">C_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">},</span><span class="n">I_t</span><span class="p">,</span><span class="n">G_t</span><span class="p">,</span><span class="n">X_t</span><span class="p">,</span><span class="n">M_t</span><span class="p">,</span><span class="n">P_t</span><span class="p">)</span>\\
+<span class="n">I_t</span> <span class="o">&amp;=</span> <span class="n">i</span><span class="p">(</span><span class="n">I_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span><span class="n">I_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">},</span><span class="n">C_t</span><span class="p">,</span><span class="n">G_t</span><span class="p">,</span><span class="n">X_t</span><span class="p">,</span><span class="n">M_t</span><span class="p">,</span><span class="n">P_t</span><span class="p">)</span>\\
+<span class="n">G_t</span> <span class="o">&amp;=</span> <span class="n">g</span><span class="p">(</span><span class="n">G_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span><span class="n">G_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">},</span><span class="n">C_t</span><span class="p">,</span><span class="n">I_t</span><span class="p">,</span><span class="n">X_t</span><span class="p">,</span><span class="n">M_t</span><span class="p">,</span><span class="n">P_t</span><span class="p">)</span>\\
+<span class="n">X_t</span> <span class="o">&amp;=</span> <span class="n">x</span><span class="p">(</span><span class="n">X_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span><span class="n">X_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">},</span><span class="n">C_t</span><span class="p">,</span><span class="n">I_t</span><span class="p">,</span><span class="n">G_t</span><span class="p">,</span><span class="n">M_t</span><span class="p">,</span><span class="n">P_t</span><span class="p">,</span><span class="n">P</span><span class="o">^</span><span class="n">f_t</span><span class="p">)</span>\\
+<span class="n">M_t</span> <span class="o">&amp;=</span> <span class="n">m</span><span class="p">(</span><span class="n">M_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span><span class="n">M_</span><span class="p">{</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">},</span><span class="n">C_t</span><span class="p">,</span><span class="n">I_t</span><span class="p">,</span><span class="n">G_t</span><span class="p">,</span><span class="n">X_t</span><span class="p">,</span><span class="n">P_t</span><span class="p">,</span><span class="n">P</span><span class="o">^</span><span class="n">f_t</span><span class="p">)</span>
+\<span class="n">end</span><span class="p">{</span><span class="n">align</span><span class="o">*</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The above <code class="docutils literal notranslate"><span class="pre">latex</span></code> mathematics code uses the  <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> symbol to tell <code class="docutils literal notranslate"><span class="pre">latex</span></code> to align the different lines (separated by <code class="docutils literal notranslate"><span class="pre">\\</span></code>) on the character immediately after the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>. In this instance the equals “=” sign.  The <code class="docutils literal notranslate"><span class="pre">*</span></code> after align supresses equation numbering.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+Y_t  &amp;=  C_t+I_t+G+t+ (X_t-M_t) \\
+C_t &amp;= c(C_{t-1},C_{t-2},I_t,G_t,X_t,M_t,P_t)\\
+I_t &amp;= i(I_{t-1},I_{t-2},C_t,G_t,X_t,M_t,P_t)\\
+G_t &amp;= g(G_{t-1},G_{t-2},C_t,I_t,X_t,M_t,P_t)\\
+X_t &amp;= x(X_{t-1},X_{t-2},C_t,I_t,G_t,M_t,P_t,P^f_t)\\
+M_t &amp;= m(M_{t-1},M_{t-2},C_t,I_t,G_t,X_t,P_t,P^f_t)
+\end{align*}\]</div>
+</section>
+</section>
+<section id="links-to-more-info-on-markdown">
+<h3><span class="section-number">1.3.5. </span>links to more info on markdown<a class="headerlink" href="#links-to-more-info-on-markdown" title="Link to this heading">#</a></h3>
+<p>There are many very good markdown cheatsheets and tutorials on the internet, one cheatsheet can be found <a class="reference external" href="https://www.markdownguide.org/cheat-sheet/">here</a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content\04_PythonEssentials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03_Installation/UpdateModelFlow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>Updating ModelFlow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PythonBasics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Some Python basics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-jupyter-notebook">1.1. Starting Jupyter Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-notebook">1.2. Creating a notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-cells">1.3. Jupyter Notebook cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-delete-and-move-cells">1.3.1. How to add, delete and move cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#change-the-type-of-a-cell">1.3.2. Change the type of a cell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-of-cells">1.3.3. Execution of cells</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-python-code">1.3.3.1. Executing python code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-cells-and-the-markdown-scripting-language-in-jupyter-notebook">1.3.4. Markdown cells and the markdown scripting language in Jupyter Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-markdown-commands">1.3.4.1. Common markdown commands</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tables-in-markdown">1.3.4.2. Tables in markdown</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-code">1.3.4.3. Displaying code</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#inine-code-blocks">1.3.4.3.1. Inine code blocks</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#multiline-code-block">1.3.4.3.2. Multiline code block</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rendering-mathematics-in-markdown">1.3.4.4. Rendering mathematics in markdown</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-and-multi-line-math">1.3.4.5. Complex and multi-line math</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#links-to-more-info-on-markdown">1.3.5. links to more info on markdown</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Andrew Burns and Ib Hansen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright World Bank. 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

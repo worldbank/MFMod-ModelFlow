@@ -1,0 +1,74 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: The World Bank's MFMod Framework in Python with Modelflow
+author: Andrew Burns and Ib Hansen
+copyright: "World Bank. 2025"
+#logo: logo.png
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  #execute_notebooks: force
+  #execute_notebooks: off
+  #execute_notebooks: auto
+  execute_notebooks: cache
+  timeout: 1000
+  exclude_patterns:
+    - 'EigenValues' # When testing as it takes forever 
+  
+only_build_toc_files: true
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: MFModinModelflow.tex
+
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+ # binderhub_url: "https://mybinder.org"  # The URL for your BinderHub (e.g., https://mybinder.org)
+
+
+repository:
+  # url                       : https://github.com/IbHansen/modelflow-manual   # Online location of the book
+  # path_to_book              : papers/mfbook  # Optional path to your book, relative to the repository root
+  # branch                    : main  # Which branch of the repository should be used when creating links (optional)
+  url                       : https://github.com/WorldBank/WorldBank.github.io   # Online location of the book
+  path_to_book              : MFMod-ModelFlow/jn/mfbook  # Optional path to your book, relative to the repository root
+  branch                    : main  # Which branch of the repository should be used when creating links (optional)
+
+# Add a bibtex file so that we can create citations
+sphinx:
+  config:
+    bibtex_reference_style: author_year
+    bibtex_default_style: plain
+    latex_show_urls: inline
+    
+
+bibtex_bibfiles:
+    - references.bib
+
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: False
+  use_repository_button: True
+  use_multitoc_numbering: false  # Restarts the numbering in each part
+  home_page_in_navbar       : true
+
+parse:
+  myst_enable_extensions:
+   # don't forget to list any other extensions you want enabled,
+   # including those that are enabled by default!
+   - amsmath
+   - dollarmath
+   - colon_fence
+   - substitution #allows the definition of variables, whose values can be inserted into the nmarkdown fields of a jupyter notebook when compiled with Jupyter Book
+  myst_substitutions:
+    "Country": "Nepal" #declares a variable Country that when inserted as {{Country} will render as Nepal in a Jupyter Book
+   
+#jupyter:
+#  cell_tag_glue:
+#    remove_cell_tags: ["latex-only"]
+  

@@ -1,0 +1,67 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: content/introduction
+   
+options:
+  numbered: true
+  
+parts:
+   - caption: The World Bank's MFMod Framework and Modelflow
+     numbered: true  
+     chapters:
+     - file: content/01_Introduction/Introduction 
+     - file: content/02_MacrostructuralModels/MacroStructuralModels             
+     - file: content/03_Installation/InstallingModelFlow         
+       sections:
+       - file: content/03_Installation/InstallingPython
+       - file: content/03_Installation/InstallingModelFlowpackage
+       - file: content/03_Installation/UpdateModelFlow
+
+#  *****************
+   - caption: Some python essentials for using World Bank models with modelflow
+     numbered: true 
+     chapters: 
+     - file: content/04_PythonEssentials/Intro_Jupyter_notebook     
+     - file: content/04_PythonEssentials/PythonBasics
+     - file: content/04_PythonEssentials/PandasDataFrames
+
+   - caption: Selected modelflow extensions to pandas
+     numbered: true 
+     chapters:      
+     - file: content/04_PythonEssentials/Modelflow and Dataframes
+       sections:
+       - file: content/04_PythonEssentials/UpdateCommand
+       - file: content/04_PythonEssentials/mfcalc
+
+   - caption: Using modelflow with World Bank models
+     numbered: true      
+     chapters:   
+     - file: content/05_WBModels/AccessingWBModels  # This will need to be revised when we have the git hub site set up
+     - file: content/05_WBModels/WorkingwWBModels
+     - file: content/05_WBModels/BehavioralEquations
+     - file: content/05_WBModels/ScenarioAnalysis
+     - file: content/05_WBModels/MoreComplexScenarios
+     - file: content/05_WBModels/Targeting
+     - file: content/05_WBModels/ReportWriting      
+     
+   - caption: Model Analytics
+     numbered: true      
+     chapters:   
+     - file: content/06_ModelAnalytics/ModelStructure
+     - file: content/06_ModelAnalytics/AttributionSomeFeatures
+     
+   - caption: Technical how tos
+     numbered: true      
+     chapters:   
+     - file: content/07_MoreFeatures/GettingHelp
+     - file: content/07_MoreFeatures/ModelFlowReference
+    
+   - caption: Backmatter
+     numbered: false
+     chapters:
+     - file: genindex.md
+     - file: Reference.md
+     
+ 
