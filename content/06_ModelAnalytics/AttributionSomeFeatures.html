@@ -275,7 +275,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/WorldBank/WorldBank.github.io/blob/main/MFMod-ModelFlow/jn/mfbook/content/06_ModelAnalytics/AttributionSomeFeatures.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/worldbank/MfMod-ModelFlow/blob/main/jn/mfbook/content/06_ModelAnalytics/AttributionSomeFeatures.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -295,7 +295,7 @@
 
 
 
-<a href="https://github.com/WorldBank/WorldBank.github.io" target="_blank"
+<a href="https://github.com/worldbank/MfMod-ModelFlow" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -535,8 +535,8 @@
 <p>Take a variable y that is a function of two other variables a and b.  In the model, the relationship might be written as:</p>
 <p><span class="math notranslate nohighlight">\(y = f(a,b)\)</span></p>
 <p>If there are two sets of results designated with a subscript 0 and 1, these can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96c3b20f-36cd-4211-8743-4c2586f81b0a">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-96c3b20f-36cd-4211-8743-4c2586f81b0a" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-18d7123a-fe77-4586-bb7d-051a19505a3b">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-18d7123a-fe77-4586-bb7d-051a19505a3b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 y_0 = f(a_0,b_0)\\
 y_1 = f(a_1,b_1)
 \end{eqnarray}\]</div>
@@ -545,20 +545,20 @@ y_1 = f(a_1,b_1)
 \underbrace{\Delta b \dfrac{\partial {f}}{\partial{b}}(a,b)}_{\Omega b}+Residual\)</span></p>
 <p>The first expression can be called <span class="math notranslate nohighlight">\(\Omega_a\)</span> or the contribution of changes in a to changes in y, and the second <span class="math notranslate nohighlight">\(\Omega_b\)</span>,  or the contribution of changes in b to changes in y.</p>
 <p><code class="docutils literal notranslate"><span class="pre">ModelFlow</span></code> performs a numerical approximation of <span class="math notranslate nohighlight">\(\Omega_a\)</span> and <span class="math notranslate nohighlight">\(\Omega_b\)</span> by performing two runs of the <span class="math notranslate nohighlight">\(f()\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0bcea99-67fa-4966-81c2-79451db5c1b4">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-a0bcea99-67fa-4966-81c2-79451db5c1b4" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}  
+<div class="amsmath math notranslate nohighlight" id="equation-481ea2b1-d54a-4287-a9fd-a7dd08cd4aac">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-481ea2b1-d54a-4287-a9fd-a7dd08cd4aac" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}  
 y_0&amp;=&amp;f(a_{0},b_{0}) \\
 y_1&amp;=&amp;f(a_0+\Delta a,b_{0}+ \Delta b)
 \end{eqnarray}\]</div>
 <p>and calculates <span class="math notranslate nohighlight">\(\Omega_a\)</span> and <span class="math notranslate nohighlight">\(\Omega_b\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0e91dde-5c8b-437e-87b3-7ace4a2d6d10">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-a0e91dde-5c8b-437e-87b3-7ace4a2d6d10" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}  
+<div class="amsmath math notranslate nohighlight" id="equation-d011bb2c-fc40-47b2-bc1f-697b79dec355">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-d011bb2c-fc40-47b2-bc1f-697b79dec355" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}  
 \Omega a&amp;=&amp;f(a_1,b_1 )-f(a_1-\Delta a,b_1) \\
 \Omega b&amp;=&amp;f(a_1,b_1 )-f(a_1,b_1-\Delta  b)
 \end{eqnarray}\]</div>
 <p>And:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-97088ab9-7e8d-4d98-827e-b2b7878e4040">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-97088ab9-7e8d-4d98-827e-b2b7878e4040" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-2939b2e7-6c18-4069-859c-d5d98062f29b">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-2939b2e7-6c18-4069-859c-d5d98062f29b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 residual = \Omega a + \Omega b -(y_1 - y_0) 
 \end{eqnarray}\]</div>
 <p>If the model is fairly linear, the residual will be small.</p>
