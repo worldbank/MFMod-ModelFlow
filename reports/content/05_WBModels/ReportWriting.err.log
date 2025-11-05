@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\wb268970\AppData\Local\anaconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+tab.pdf()
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mException[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[11], line 1[0m
+[1;32m----> 1[0m [43mtab[49m[38;5;241;43m.[39;49m[43mpdf[49m[43m([49m[43m)[49m
+
+File [1;32m~\AppData\Local\anaconda3\envs\ModelFlow\Lib\site-packages\ModelFlow-1.0.8-py3.10.egg\modelreport.py:557[0m, in [0;36mDisplayDef.pdf[1;34m(self, pdfopen, show, width, height, typesetter)[0m
+[0;32m    555[0m [38;5;28;01mdef[39;00m [38;5;21mpdf[39m([38;5;28mself[39m,pdfopen[38;5;241m=[39m[38;5;28;01mFalse[39;00m,show[38;5;241m=[39m[38;5;28;01mTrue[39;00m,width[38;5;241m=[39mWIDTH,height[38;5;241m=[39mHEIGHT,typesetter[38;5;241m=[39m[38;5;124m'[39m[38;5;124mxelatex  -interaction=batchmode -no-shell-escape[39m[38;5;124m'[39m):
+[0;32m    556[0m     repo [38;5;241m=[39m LatexRepo([38;5;28mself[39m[38;5;241m.[39mlatex ,name[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mname)
+[1;32m--> 557[0m     [38;5;28;01mreturn[39;00m [43mrepo[49m[38;5;241;43m.[39;49m[43mpdf[49m[43m([49m[43mpdfopen[49m[43m,[49m[43mshow[49m[43m,[49m[43mwidth[49m[43m,[49m[43mheight[49m[43m,[49m[43mtypesetter[49m[43m)[49m
+
+File [1;32m~\AppData\Local\anaconda3\envs\ModelFlow\Lib\site-packages\ModelFlow-1.0.8-py3.10.egg\modelreport.py:794[0m, in [0;36mLatexRepo.pdf[1;34m(self, pdfopen, show, width, height, typesetter)[0m
+[0;32m    791[0m [38;5;28;01mif[39;00m xx0[38;5;241m.[39mreturncode: 
+[0;32m    792[0m      wb[38;5;241m.[39mopen(latex_dir[38;5;241m.[39mabsolute(), new[38;5;241m=[39m[38;5;241m1[39m)
+[1;32m--> 794[0m      [38;5;28;01mraise[39;00m [38;5;167;01mException[39;00m([38;5;124mf[39m[38;5;124m'[39m[38;5;124mError creating PDF file, [39m[38;5;132;01m{[39;00mxx0[38;5;241m.[39mreturncode[38;5;132;01m}[39;00m[38;5;124m, look in the latex file, [39m[38;5;132;01m{[39;00mlatex_file[38;5;132;01m}[39;00m[38;5;124m'[39m)
+[0;32m    796[0m [38;5;28;01mif[39;00m pdfopen:
+[0;32m    797[0m     fileurl [38;5;241m=[39m [38;5;124mf[39m[38;5;124m'[39m[38;5;124mfile://[39m[38;5;132;01m{[39;00mpdf_file[38;5;241m.[39mresolve()[38;5;132;01m}[39;00m[38;5;124m'[39m
+
+[1;31mException[0m: Error creating PDF file, 1, look in the latex file, latex\My_first_table\My_first_table.tex
+

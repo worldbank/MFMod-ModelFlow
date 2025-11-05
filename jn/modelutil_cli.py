@@ -991,7 +991,8 @@ if __name__ == '__main__':
         search(toc_files,r'\[.*\]\(\)',notfound=False,silent=0,fileopen=0,printmatch=1)
         search(toc_files,r'savefigs',notfound=False,silent=0,fileopen=0)
         search(toc_files,r'{index} .* \.equp',notfound=False,silent=0)
-        search(toc_files,'::{image}',notfound=False,silent=0)
+        search(toc_files,'%load_ext',notfound=False,silent=0,replace='# %load_ext')
+        search(toc_files,'%autoreload',notfound=False,silent=0,replace = '# %autoreload')
         
 #%% ``` 
      #   w = search(toc_files, r"^({(?:[iI]mage|[oO]nly)}[\s\S]*?^)```")

@@ -1,0 +1,92 @@
+Traceback (most recent call last):
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "c:\WBG\miniconda3\envs\modelflow\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+AFShock=AFShock.mfcalc("<2028 2028> PAKNEGDIFPRVKN_A = PAKNEGDIFPRVKN_A + (.01*PAKNYGDPMKTPKN/PAKNEGDIKSTKKN(-1))");
+
+print("Shocked AF levels")
+AFShock.loc[2025:2030,'PAKNEGDIFPRVKN_A']
+------------------
+
+----- stdout -----
+
+
+*** PROBLEM **
+FRML <> PAKNEGDIFPRVKN_A = PAKNEGDIFPRVKN_A + (.01*PAKNYGDPMKTPKN/PAKNEGDIKSTKKN(-1)) $
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mException[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[26], line 1[0m
+[1;32m----> 1[0m AFShock[38;5;241m=[39m[43mAFShock[49m[38;5;241;43m.[39;49m[43mmfcalc[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m<2028 2028> PAKNEGDIFPRVKN_A = PAKNEGDIFPRVKN_A + (.01*PAKNYGDPMKTPKN/PAKNEGDIKSTKKN(-1))[39;49m[38;5;124;43m"[39;49m[43m)[49m;
+[0;32m      3[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mShocked AF levels[39m[38;5;124m"[39m)
+[0;32m      4[0m AFShock[38;5;241m.[39mloc[[38;5;241m2025[39m:[38;5;241m2030[39m,[38;5;124m'[39m[38;5;124mPAKNEGDIFPRVKN_A[39m[38;5;124m'[39m]
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelmf.py:177[0m, in [0;36mmfcalc.__call__[1;34m(self, eq, start, end, showeq, **kwargs)[0m
+[0;32m    174[0m     xeq[38;5;241m=[39meq
+[0;32m    175[0m     blanksmpl [38;5;241m=[39m [38;5;28;01mTrue[39;00m 
+[1;32m--> 177[0m res [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_obj[49m[38;5;241;43m.[39;49m[43mmf[49m[43m([49m[43mxeq[49m[43m,[49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m[38;5;241m.[39msolve([38;5;241m*[39m[38;5;241m*[39m{[38;5;241m*[39m[38;5;241m*[39mkwargs,[38;5;241m*[39m[38;5;241m*[39m{[38;5;124m'[39m[38;5;124mstart[39m[38;5;124m'[39m:start,[38;5;124m'[39m[38;5;124mend[39m[38;5;124m'[39m:end,[38;5;124m'[39m[38;5;124msilent[39m[38;5;124m'[39m:[38;5;28;01mTrue[39;00m}})
+[0;32m    178[0m [38;5;66;03m# print('jddd')[39;00m
+[0;32m    179[0m [38;5;28;01mif[39;00m blanksmpl:  
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelmf.py:88[0m, in [0;36mmf.__call__[1;34m(self, eq, **kwargs)[0m
+[0;32m     86[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m
+[0;32m     87[0m [38;5;28;01melse[39;00m:
+[1;32m---> 88[0m     res [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mmakemodel[49m[43m([49m[43meq[49m[43m,[49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[0;32m     89[0m     [38;5;28;01mreturn[39;00m res[38;5;241m.[39mmf
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelmf.py:70[0m, in [0;36mmf.makemodel[1;34m(self, eq, **kwargs)[0m
+[0;32m     68[0m [38;5;28mself[39m[38;5;241m.[39mmodelopt [38;5;241m=[39m {[38;5;241m*[39m[38;5;241m*[39m[38;5;28mself[39m[38;5;241m.[39mmodelopt,[38;5;241m*[39m[38;5;241m*[39mkwargs} 
+[0;32m     69[0m [38;5;28mself[39m[38;5;241m.[39meq [38;5;241m=[39m eq
+[1;32m---> 70[0m [38;5;28mself[39m[38;5;241m.[39mmodel [38;5;241m=[39m [43mmodel[49m[38;5;241;43m.[39;49m[43mfrom_eq[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43meq[49m[43m,[49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[0;32m     71[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39mcopy()
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelclass.py:212[0m, in [0;36mBaseModel.from_eq[1;34m(cls, equations, modelname, silent, straight, funks, params, tabcomplete, previousbase, normalized, norm, sym, sep, **kwargs)[0m
+[0;32m    209[0m udrullet [38;5;241m=[39m mp[38;5;241m.[39mexplode(equations, norm[38;5;241m=[39mnorm,
+[0;32m    210[0m                       sym[38;5;241m=[39msym, funks[38;5;241m=[39mfunks, sep[38;5;241m=[39msep)
+[0;32m    211[0m pt[38;5;241m.[39mcheck_syntax_model(udrullet)
+[1;32m--> 212[0m mmodel [38;5;241m=[39m [38;5;28;43mcls[39;49m[43m([49m[43mudrullet[49m[43m,[49m[43m [49m[43mmodelname[49m[43m,[49m[43m [49m[43msilent[49m[38;5;241;43m=[39;49m[43msilent[49m[43m,[49m[43m [49m[43mstraight[49m[38;5;241;43m=[39;49m[43mstraight[49m[43m,[49m[43m [49m[43mfunks[49m[38;5;241;43m=[39;49m[43mfunks[49m[43m,[49m
+[0;32m    213[0m [43m             [49m[43mtabcomplete[49m[38;5;241;43m=[39;49m[43mtabcomplete[49m[43m,[49m[43m [49m[43mpreviousbase[49m[38;5;241;43m=[39;49m[43mpreviousbase[49m[43m,[49m[43m [49m[43mnormalized[49m[38;5;241;43m=[39;49m[43mnormalized[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[0;32m    214[0m mmodel[38;5;241m.[39mequations_original [38;5;241m=[39m equations
+[0;32m    215[0m [38;5;28;01mreturn[39;00m mmodel
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelclass.py:159[0m, in [0;36mBaseModel.__init__[1;34m(self, i_eq, modelname, silent, straight, funks, tabcomplete, previousbase, use_preorder, normalized, safeorder, var_description, model_description, var_groups, reports, equations_latex, eviews_dict, use_fbmin, substitution, **kwargs)[0m
+[0;32m    157[0m [38;5;28mself[39m[38;5;241m.[39msave [38;5;241m=[39m [38;5;28;01mTrue[39;00m    [38;5;66;03m# saves the dataframe in self.basedf, self.lastdf[39;00m
+[0;32m    158[0m [38;5;28mself[39m[38;5;241m.[39muse_fbmin [38;5;241m=[39m use_fbmin
+[1;32m--> 159[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43manalyzemodelnew[49m[43m([49m[43msilent[49m[43m)[49m  [38;5;66;03m# on board the model equations[39;00m
+[0;32m    160[0m [38;5;28mself[39m[38;5;241m.[39mmaxstart [38;5;241m=[39m [38;5;241m0[39m
+[0;32m    161[0m [38;5;28mself[39m[38;5;241m.[39mgenrcolumns [38;5;241m=[39m []
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelclass.py:335[0m, in [0;36mBaseModel.analyzemodelnew[1;34m(self, silent)[0m
+[0;32m    330[0m [38;5;28mself[39m[38;5;241m.[39mnormalized [38;5;241m=[39m [38;5;129;01mnot[39;00m [38;5;28mall[39m((v[38;5;241m.[39mendswith([38;5;124m'[39m[38;5;124m___RES[39m[38;5;124m'[39m)
+[0;32m    331[0m                           [38;5;28;01mfor[39;00m v [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mendogene))
+[0;32m    332[0m [38;5;28mself[39m[38;5;241m.[39mendogene_true [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mendogene [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mnormalized [38;5;28;01melse[39;00m {
+[0;32m    333[0m     v [38;5;28;01mfor[39;00m v [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mexogene [38;5;28;01mif[39;00m v[38;5;241m+[39m[38;5;124m'[39m[38;5;124m___RES[39m[38;5;124m'[39m [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mendogene}
+[1;32m--> 335[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mcheck_endo_rhs[49m[43m([49m[43m)[49m 
+[0;32m    336[0m [38;5;66;03m# dummy variables  for variables for which to calculate adjustment variables [39;00m
+[0;32m    339[0m [38;5;28mself[39m[38;5;241m.[39mfix_dummy [38;5;241m=[39m  [38;5;28msorted[39m(vx[38;5;241m+[39m[38;5;124m'[39m[38;5;124m_D[39m[38;5;124m'[39m [38;5;28;01mfor[39;00m vx [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mendogene 
+[0;32m    340[0m             [38;5;28;01mif[39;00m   vx[38;5;241m+[39m[38;5;124m'[39m[38;5;124m_X[39m[38;5;124m'[39m [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mexogene [38;5;129;01mand[39;00m  vx[38;5;241m+[39m[38;5;124m'[39m[38;5;124m_D[39m[38;5;124m'[39m [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39mexogene )
+
+File [1;32mc:\WBG\miniconda3\envs\ModelFlow\Lib\site-packages\modelclass.py:1085[0m, in [0;36mBaseModel.check_endo_rhs[1;34m(self)[0m
+[0;32m   1083[0m [38;5;28mprint[39m([38;5;124m'[39m[38;5;130;01m\n[39;00m[38;5;130;01m\n[39;00m[38;5;124m*** PROBLEM **[39m[38;5;124m'[39m)
+[0;32m   1084[0m [38;5;28mprint[39m([38;5;28mself[39m[38;5;241m.[39mallvar[endovar][[38;5;124m'[39m[38;5;124mfrml[39m[38;5;124m'[39m])
+[1;32m-> 1085[0m [38;5;28;01mraise[39;00m [38;5;167;01mException[39;00m ([38;5;124mf[39m[38;5;124m'[39m[38;5;124mERROR in frml for [39m[38;5;132;01m{[39;00mendovar[38;5;132;01m}[39;00m[38;5;124m this is on right hand side un-lagged [39m[38;5;132;01m{[39;00mboth[38;5;132;01m}[39;00m[38;5;124m'[39m)
+
+[1;31mException[0m: ERROR in frml for PAKNEGDIFPRVKN_A this is on right hand side un-lagged {'PAKNEGDIFPRVKN_A'}
+

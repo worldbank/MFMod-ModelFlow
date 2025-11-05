@@ -571,4 +571,13 @@ if 'copywb' in options:
         copytree(buildhtml,destination,dirs_exist_ok=True )
         mu.make_replication(zip=False,destinationdir=destinationjn)
         print('Remember to push the repo ')
+
+if 'copypaper' in options:
+    try:
+        (destination := Path(fr'{bookdir}/HTML/')).mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        print(fr'Problem creating {bookdir}/HTML/,  Error:{e}')
+    else:     
+        copytree(buildhtml,destination,dirs_exist_ok=True )
+        print('Remember to push the repo ')
     
