@@ -12,7 +12,7 @@ The manual describes the implementation of the World Bank’s MFMod Framework \[
 
 The manual exists in a variety of formats:
 
-• a PDF version (available \[here](https://))
+• a PDF version (available [here](https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099120125152010503))
 
 • an html version (available here (https://worldbank.github.io/MFMod-ModelFlow/index.html)). The html version
 
